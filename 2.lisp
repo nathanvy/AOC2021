@@ -1,19 +1,15 @@
-(defparameter *test-input* '(("forward" "5")
-			     ("down" "5")
-			     ("forward" "8")
-			     ("up" "3")
-			     ("down" "8")
-			     ("forward" "2")))
-
-(defparameter *input-a* (mapcar #'mangle (uiop:read-file-lines "2a.txt")))
+(load "util.lisp")
 
 (defun mangle (input)
   (uiop:split-string input :separator " "))
 
-(defun part1 ()
+(defparameter *test-input* (mapcar #'mangle (uiop:read-file-lines "test2a.txt")))
+(defparameter *input-a* (mapcar #'mangle (split-sequence:split-sequence #\newline (fetch-input 2) :remove-empty-subseqs t)))
+
+(defun part1 (input)
   (let* ((pos 0)
 	 (depth 0))
-    (loop for sublist in *input-a*
+    (loop for sublist in input
 	  for x = (parse-integer (cadr sublist))
 	  do (cond ((string= (car sublist) "forward") (incf pos x))
 		   ((string= (car sublist) "down") (incf depth x))
@@ -21,11 +17,11 @@
     (format t "~a ~a ~a ~%" depth pos (* depth pos))))
 
 
-(defun part2 ()
+(defun part2 (input)
   (let* ((pos 0)
 	 (depth 0)
 	 (aim 0))
-    (loop for sublist in *input-a*
+    (loop for sublist in input
 	  for x = (parse-integer (cadr sublist))
 	  do (cond ((string= (car sublist) "forward") (progn
 							(incf pos x)
