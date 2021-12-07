@@ -1,5 +1,7 @@
 (ql:quickload "split-sequence")
 (ql:quickload "dexador")
+(ql:quickload "str")
+(ql:quickload "cl-ppcre")
 
 (defun fetch-input (challenge)
   (let* ((session-data (uiop:read-file-string "session.cookie")))
