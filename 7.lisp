@@ -10,9 +10,13 @@
   (reduce #'+ (mapcar #'(lambda (x)  (/ (* (abs (- x n)) (1+ (abs (- x n)))) 2)) input)))
 
 (defun part1 (input)
-  (loop for i from 0 to (length input)
-	minimize (crunch input i)))
+  (let ((far-crab (loop for crab in input
+		       maximize crab)))
+    (loop for i from 0 to far-crab
+	  minimize (crunch input i))))
 
 (defun part2 (input)
-  (loop for i from 0 to (length input)
-	minimize (crunch-part2 input i)))
+  (let ((far-crab (loop for crab in input
+			maximize crab)))
+    (loop for i from 0 to far-crab
+	  minimize (crunch-part2 input i))))
