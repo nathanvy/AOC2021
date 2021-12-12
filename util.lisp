@@ -2,6 +2,8 @@
 (ql:quickload "dexador")
 (ql:quickload "str")
 (ql:quickload "cl-ppcre")
+(ql:quickload "alexandria")
+(ql:quickload "fset")
 
 (defun fetch-input (challenge)
   (let* ((session-data (uiop:read-file-string "session.cookie")))
