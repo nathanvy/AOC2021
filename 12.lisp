@@ -19,6 +19,8 @@
 (defun fgsfds (current seen &optional (duplicate nil))
   (cond
     ((string= current "end") (return-from fgsfds 1))
+    ((and (string= current "start")
+	  (not (fset:empty? seen))) (return-from fgsfds 0))
     ((and (not (every #'upper-case-p current))
 	  (fset:contains? seen current))
      (if (null duplicate) (setf duplicate current) (return-from fgsfds 0))))
